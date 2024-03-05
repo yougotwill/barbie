@@ -1,0 +1,111 @@
+{
+  // Place your snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  "Console Logging": {
+    "scope": "typescriptreact,typescript,javascriptreact,javascript",
+    "prefix": ["conl"],
+    "body": ["console.log(`WIP: $1`);$0"],
+    "description": "Log a message to the console."
+  },
+  "Class Definition": {
+    "scope": "typescriptreact",
+    "prefix": ["cl", "class"],
+    "body": ["className={cn('$0')}"],
+    "description": "React: Define classes using cn alias"
+  },
+  "React Component": {
+    "scope": "typescriptreact",
+    "prefix": ["rc"],
+    "body": [
+      "export default function ${1:Name}() {",
+      "  return(<>${2:}</>);",
+      "}"
+    ],
+    "description": "React: TypeScript Component"
+  },
+  "React Component with Props": {
+    "scope": "typescriptreact",
+    "prefix": ["rcp"],
+    "body": [
+      "type Props = {",
+      "${2}",
+      "};",
+      "",
+      "export default function ${1:Name}(props: Props) {",
+      "  const {${3:}} = props;",
+      "",
+      "  return(<>${4:}</>);",
+      "}"
+    ],
+    "description": "React: TypeScript Component with Props"
+  },
+  "NextJS: Page Component": {
+    "scope": "typescriptreact",
+    "prefix": ["npc"],
+    "body": [
+      "type Props = {",
+      "${2}",
+      "};",
+      "",
+      "export default function Page(props: Props) {",
+      "  const {${2:}} = props;",
+      "",
+      "  return(<>${3:}</>);",
+      "}"
+    ],
+    "description": "NextJS: Page Component with Props"
+  },
+  "NextJS: Layout Component": {
+    "scope": "typescriptreact",
+    "prefix": ["nlc"],
+    "body": [
+      "import { ReactNode } from react;",
+      "",
+      "type Props = {",
+      "  children: ReactNode,",
+      "  ${2}",
+      "};",
+      "",
+      "export default function ${1:Root}Layout(props: Props) {",
+      "  const {children, ${2:}} = props;",
+      "",
+      "  return(<>${3:}</>);",
+      "}"
+    ],
+    "description": "NextJS: Layout Component with Props"
+  },
+  "NextJS: GetStaticProps": {
+    "scope": "typescriptreact",
+    "prefix": ["ngs"],
+    "body": [
+      "export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {",
+      "${1:}",
+      "  return {",
+      "    props: {",
+      "      ${2:}",
+      "    }",
+      "  };",
+      "};"
+    ],
+    "description": "NextJS: GetStaticProps Function with TypeScript"
+  },
+  "NextJS: GetServerSideProps": {
+    "scope": "typescriptreact",
+    "prefix": ["ngss"],
+    "body": [
+      "export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {",
+      "${1:}",
+      "  return {",
+      "    props: {",
+      "      ${2:}",
+      "    }",
+      "  };",
+      "};"
+    ],
+    "description": "NextJS: GetServerSideProps Function with TypeScript"
+  }
+}

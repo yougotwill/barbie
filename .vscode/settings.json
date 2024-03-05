@@ -1,0 +1,29 @@
+{
+  // #region For laptop screen
+  // "window.zoomLevel": -1,
+  // "editor.fontSize": 16,
+  // #endregion
+  "commentAnchors.workspace.excludeFiles": "**/{node_modules,.git,.idea,target,.next,out,build,bin,obj,vendor,coverage",
+  "files.exclude": {},
+  "files.watcherExclude": {
+    ".next": true
+  },
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "svg.preview.background": "editor",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true
+}

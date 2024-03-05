@@ -1,0 +1,6 @@
+# editor
+.vscode/**
+.vscrof/**
+
+# tailwind
+src/app/globals.css

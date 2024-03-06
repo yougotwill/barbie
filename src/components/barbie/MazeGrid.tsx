@@ -1,13 +1,13 @@
 'use client';
 import { usePositionsContext } from '@/contexts/positions';
-import { cn } from '@/utils';
-import { useInterval, useMount } from 'react-use';
-import Block from './Block';
-import { Maze } from '@/types';
 import { resolveMaze } from '@/scripts/resolveMaze';
+import { Maze } from '@/types';
+import { cn } from '@/utils';
 import { useState } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { useInterval, useMount } from 'react-use';
+import Block from './Block';
 
 const mazes: Array<Maze> = [
   {
@@ -256,7 +256,7 @@ const mazes: Array<Maze> = [
   },
 ];
 
-const myMaze = mazes[1];
+const myMaze = mazes[0];
 
 console.time('MAZE SOLVED');
 const sol = resolveMaze(myMaze, [
@@ -276,7 +276,7 @@ export function MazeGrid() {
       setPlayer(solution[pos]);
       setPos(pos + 1);
     },
-    pos < solution.length ? 100 : null,
+    pos < solution.length ? 1000 : null,
   );
 
   useMount(() => {
@@ -289,7 +289,7 @@ export function MazeGrid() {
   });
 
   return (
-    <div className={cn('flex flex-col items-center justify-center')}>
+    <div className={cn('flex flex-col items-center justify-center ')}>
       <div
         className={cn('h-100 w-100 mx-auto flex items-center justify-center')}
       >

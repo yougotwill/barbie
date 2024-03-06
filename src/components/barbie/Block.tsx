@@ -59,10 +59,10 @@ export default function Block(props: BlockProps) {
   return (
     <motion.div
       className={cn(
-        'text-xxs m-1 flex h-2 w-2 items-center justify-center  p-2',
-        isPlayer ? 'bg-white' : 'bg-pink-700',
-        isStart ? 'bg-pink-500' : 'bg-pink-700',
-        isEnd ? 'bg-pink-500' : 'bg-pink-700',
+        'flex h-2 w-2 items-center justify-center p-2  text-xxs',
+        isPlayer ? 'bg-white' : 'bg-pink-100',
+        isStart ? 'bg-pink-500' : 'bg-pink-100',
+        isEnd ? 'bg-pink-500' : 'bg-pink-100',
         value === 0 ? 'text-xxs' : 'text-xs',
       )}
       initial={{ opacity: 0.25 }}

@@ -7,24 +7,56 @@ import { Maze } from '@/types';
 import { resolveMaze } from '@/scripts/resolveMaze';
 import { useState } from 'react';
 
-export function MazeGrid(props: Maze) {
+const myMaze: Maze = {
+  numberOfColumns: 20,
+  numberOfRows: 20,
+  startingCoordinateX: 14,
+  startingCoordinateY: 19,
+  maze: [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1],
+    [1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1],
+    [1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1],
+    [1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+    [1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1],
+    [1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1],
+    [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1],
+    [1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1],
+    [1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1],
+    [1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+  ],
+};
+
+const sol = resolveMaze(myMaze, [
+  { x: myMaze.startingCoordinateX, y: myMaze.startingCoordinateY },
+]);
+
+export function MazeGrid() {
   const [pos, setPos] = useState<number>(0);
-  const { startingCoordinateX, startingCoordinateY, maze } = props;
 
   const { setPlayer, setStart, setEnd, setSolution, solution } =
     usePositionsContext();
 
-  useInterval(() => {
-    setPlayer(solution[pos]);
-    setPos(pos + 1);
-  }, 1000);
+  useInterval(
+    () => {
+      setPlayer(solution[pos]);
+      setPos(pos + 1);
+    },
+    pos < solution.length ? 1000 : null,
+  );
 
   useMount(() => {
-    setPlayer({ x: startingCoordinateX, y: startingCoordinateY });
-    setStart({ x: startingCoordinateX, y: startingCoordinateY });
-    const sol = resolveMaze(props, [
-      { x: startingCoordinateX, y: startingCoordinateY },
-    ]);
+    setPlayer({ x: myMaze.startingCoordinateX, y: myMaze.startingCoordinateY });
+    setStart({ x: myMaze.startingCoordinateX, y: myMaze.startingCoordinateY });
     setSolution(sol);
     console.info('SOLVED');
     console.info(sol);
@@ -33,7 +65,7 @@ export function MazeGrid(props: Maze) {
 
   return (
     <div className={cn('h-100 w-100 mx-auto flex items-center justify-center')}>
-      {maze.map((row, x) => {
+      {myMaze.maze.map((row, x) => {
         return (
           <div key={`row-${x}`}>
             {row.map((cell, y) => {

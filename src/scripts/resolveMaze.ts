@@ -1,5 +1,3 @@
-import * as jsonData from './maze2.json';
-
 type State = {
   numberOfColumns: number;
   numberOfRows: number;
@@ -10,19 +8,10 @@ type State = {
 
 const visitedPoints: Array<Point> = [];
 
-const typedMaze = jsonData as State;
-
-console.warn(jsonData);
-
 type Point = {
   x: number;
   y: number;
   dest?: string;
-};
-
-const currentLocation: Point = {
-  x: typedMaze.startingCoordinateX,
-  y: typedMaze.startingCoordinateY,
 };
 
 function locationIsAccessible(dest: Point, state: State) {
@@ -81,7 +70,7 @@ function areWeDone(loc: Point, state: State) {
 function allValidNeighbours(
   state: State,
   currentLocation: Point,
-  currentPath: Array<Point>
+  currentPath: Array<Point>,
 ): Array<Point> {
   const up: Point = {
     x: currentLocation.x,
@@ -112,17 +101,17 @@ function allValidNeighbours(
       (m) =>
         !visitedPoints.some((visited) => {
           return visited.x === m.x && visited.y === m.y;
-        })
+        }),
     )
     .filter((m) => locationIsAccessible(m, state));
 }
 
-function resolveMaze(state: State, currentPath: Array<Point>) {
+export function resolveMaze(state: State, currentPath: Array<Point>) {
   console.info(
     '#####  currentPath',
     currentPath,
     '  ### visitedPoints',
-    visitedPoints
+    visitedPoints,
   );
 
   const currentLocation = currentPath[currentPath.length - 1];
@@ -145,5 +134,3 @@ function resolveMaze(state: State, currentPath: Array<Point>) {
 
   return resolveMaze(state, newPath);
 }
-
-resolveMaze(typedMaze, [currentLocation]);

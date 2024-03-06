@@ -1,18 +1,34 @@
 'use client';
 import { usePositionsContext } from '@/contexts/positions';
 import { cn } from '@/utils';
-import { useMount } from 'react-use';
+import { useInterval, useMount } from 'react-use';
 import Block from './Block';
 import { Maze } from '@/types';
+import { resolveMaze } from '@/scripts/resolveMaze';
+import { useState } from 'react';
 
 export function MazeGrid(props: Maze) {
+  const [pos, setPos] = useState<number>(0);
   const { startingCoordinateX, startingCoordinateY, maze } = props;
 
-  const { setPlayer, setStart, setEnd } = usePositionsContext();
+  const { setPlayer, setStart, setEnd, setSolution, solution } =
+    usePositionsContext();
+
+  useInterval(() => {
+    setPlayer(solution[pos]);
+    setPos(pos + 1);
+  }, 1000);
 
   useMount(() => {
     setPlayer({ x: startingCoordinateX, y: startingCoordinateY });
     setStart({ x: startingCoordinateX, y: startingCoordinateY });
+    const sol = resolveMaze(props, [
+      { x: startingCoordinateX, y: startingCoordinateY },
+    ]);
+    setSolution(sol);
+    console.info('SOLVED');
+    console.info(sol);
+    setEnd(sol[sol.length - 1]);
   });
 
   return (

@@ -11,6 +11,8 @@ export interface Positions {
   setStart: (...value: Array<any>) => void;
   end: Point;
   setEnd: (...value: Array<any>) => void;
+  solution: Array<Point>;
+  setSolution: (...value: Array<any>) => void;
 }
 
 const PositionContext = createContext<Positions>({
@@ -20,6 +22,8 @@ const PositionContext = createContext<Positions>({
   setStart: () => {},
   end: { x: 0, y: 0 },
   setEnd: () => {},
+  solution: [],
+  setSolution: () => {},
 });
 
 export function usePositionsContext() {

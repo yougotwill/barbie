@@ -6,6 +6,8 @@ import Block from './Block';
 import { Maze } from '@/types';
 import { resolveMaze } from '@/scripts/resolveMaze';
 import { useState } from 'react';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 const myMaze: Maze = {
   numberOfColumns: 20,
@@ -69,7 +71,7 @@ export function MazeGrid() {
         return (
           <div key={`row-${x}`}>
             {row.map((cell, y) => {
-              return <Block key={`${x},${y}`} pos={{ x, y }} />;
+              return <Block key={`${x},${y}`} pos={{ x, y }} value={cell} />;
             })}
           </div>
         );

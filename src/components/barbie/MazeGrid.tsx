@@ -276,7 +276,7 @@ export function MazeGrid() {
       setPlayer(solution[pos]);
       setPos(pos + 1);
     },
-    pos < solution.length ? 1000 : null,
+    pos < solution.length ? 100 : null,
   );
 
   useMount(() => {
@@ -289,15 +289,20 @@ export function MazeGrid() {
   });
 
   return (
-    <div className={cn('flex flex-col items-center justify-center ')}>
-      <div
-        className={cn('h-100 w-100 mx-auto flex items-center justify-center')}
-      >
+    <div className={cn('flex flex-col items-center justify-center')}>
+      <div className={cn('mx-auto flex items-center justify-center')}>
         {myMaze.maze.map((row, x) => {
           return (
-            <div key={`row-${x}`}>
+            <div key={`row-${x}`} className="bg-white">
               {row.map((cell, y) => {
-                return <Block key={`${x},${y}`} pos={{ x, y }} value={cell} />;
+                return (
+                  <Block
+                    key={`${x},${y}`}
+                    pos={{ y: x, x: y }}
+                    value={cell}
+                    title={`x: ${x}, y: ${y} - ${cell === 1 ? 'wall' : 'path'}`}
+                  />
+                );
               })}
             </div>
           );

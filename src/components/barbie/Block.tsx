@@ -8,10 +8,11 @@ import { useEffect, useState } from 'react';
 type BlockProps = {
   pos: Point;
   value: number;
+  title: string;
 };
 
 export default function Block(props: BlockProps) {
-  const { pos, value } = props;
+  const { pos, value, title } = props;
 
   const { player, setPlayer, start, setStart, end, setEnd } =
     usePositionsContext();
@@ -19,6 +20,7 @@ export default function Block(props: BlockProps) {
   // const posText = `${pos.x},${pos.y}`;
   const blockText = value === 1 ? '⛰️' : '';
 
+  const [isVisited, setIsVisited] = useState(false);
   const [isPlayer, setIsPlayer] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
@@ -41,7 +43,8 @@ export default function Block(props: BlockProps) {
     } else {
       if (isPlayer) {
         setIsPlayer(false);
-        setIcon(blockText);
+        setIsVisited(true);
+        setIcon('🔴');
       }
     }
 
@@ -58,12 +61,13 @@ export default function Block(props: BlockProps) {
 
   return (
     <motion.div
+      title={title}
       className={cn(
-        'flex h-2 w-2 items-center justify-center p-2  text-xxs',
-        isPlayer ? 'bg-white' : 'bg-pink-100',
-        isStart ? 'bg-pink-500' : 'bg-pink-100',
-        isEnd ? 'bg-pink-500' : 'bg-pink-100',
-        value === 0 ? 'text-xxs' : 'text-xs',
+        'text-md flex h-2 w-2 items-center justify-center bg-white p-2',
+        isPlayer && 'rounded-full bg-pink-300',
+        isStart && 'rounded-full bg-pink-500',
+        isEnd && 'rounded-full bg-pink-500',
+        value === 0 ? 'text-xs' : 'text-sm',
       )}
       initial={{ opacity: 0.25 }}
       animate={{ opacity: 1.0 }}

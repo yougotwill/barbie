@@ -11,7 +11,8 @@ module.exports = {
       sans: ['Raleway', 'Helvetica', 'Arial', 'sans-serif'],
     },
     fontSize: {
-      xs: '0.4rem',
+      sm: '0.8rem',
+      xs: '0.5rem',
       xxs: '0.3rem',
     },
     extend: {

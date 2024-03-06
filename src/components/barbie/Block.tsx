@@ -3,12 +3,39 @@ import { usePositionsContext } from '@/contexts/positions';
 import { Point } from '@/types';
 import { cn, isEqualPoint } from '@/utils';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type BlockProps = {
   pos: Point;
   value: number;
   title: string;
+};
+
+const WallTile = () => {
+  return (
+    <div className="absolute">
+      <div className="relative  flex">
+        <div className="-mr-4">⛰️</div>
+        <div className="mt-2">🏔️</div>
+      </div>
+    </div>
+  );
+};
+
+const HomeTile = () => {
+  return <div className="absolute">🏠</div>;
+};
+
+const PlayerTile = () => {
+  return <div className="absolute">💃</div>;
+};
+
+const EndTile = () => {
+  return <div className="absolute">🙋‍♂️</div>;
+};
+
+const PathTile = () => {
+  return <div className="absolute">🔴</div>;
 };
 
 export default function Block(props: BlockProps) {
@@ -18,61 +45,67 @@ export default function Block(props: BlockProps) {
     usePositionsContext();
 
   // const posText = `${pos.x},${pos.y}`;
-  const blockText = value === 1 ? '⛰️' : '';
+  const blockCell = useMemo(() => {
+    if (value === 1) {
+      return WallTile;
+    } else {
+      return <></>;
+    }
+  }, [value]);
 
   const [isVisited, setIsVisited] = useState(false);
   const [isPlayer, setIsPlayer] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
-  const [icon, setIcon] = useState(blockText);
+  const [tile, setTile] = useState(blockCell);
+  const isWall = value === 1;
 
   useEffect(() => {
     if (isEqualPoint(pos, start)) {
       setIsStart(true);
-      setIcon('🏠');
+      setTile(HomeTile);
     } else {
       if (isStart) {
         setIsStart(false);
-        setIcon(blockText);
+        setTile(blockCell);
       }
     }
 
     if (isEqualPoint(pos, player)) {
       setIsPlayer(true);
-      setIcon('💃');
+      setTile(PlayerTile);
     } else {
       if (isPlayer) {
         setIsPlayer(false);
         setIsVisited(true);
-        setIcon('🔴');
+        setTile(PathTile);
       }
     }
 
     if (isEqualPoint(pos, end)) {
       setIsEnd(true);
-      setIcon('🙋‍♂️');
+      setTile(EndTile);
     } else {
       if (isEnd) {
         setIsEnd(false);
-        setIcon(blockText);
+        setTile(blockCell);
       }
     }
-  }, [blockText, end, isEnd, isPlayer, isStart, player, pos, start]);
+  }, [blockCell, end, isEnd, isPlayer, isStart, player, pos, start]);
 
   return (
     <motion.div
       title={title}
       className={cn(
-        'text-md flex h-2 w-2 items-center justify-center bg-white p-2',
+        'text-xl relative flex aspect-square h-full w-full items-center justify-center bg-white p-4',
         isPlayer && 'rounded-full bg-pink-300',
         isStart && 'rounded-full bg-pink-500',
         isEnd && 'rounded-full bg-pink-500',
-        value === 0 ? 'text-xs' : 'text-sm',
       )}
       initial={{ opacity: 0.25 }}
       animate={{ opacity: 1.0 }}
     >
-      {icon}
+      {tile}
     </motion.div>
   );
 }

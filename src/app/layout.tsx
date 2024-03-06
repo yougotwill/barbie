@@ -14,15 +14,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" prefix="og: http://ogp.me/ns#">
-      <body
-        className={cn(
-          'container mx-auto bg-zinc-800 text-primary-foreground antialiased',
-        )}
-      >
+      <body className={cn('bg-pink-500 text-primary-foreground antialiased')}>
         <PositionProvider>
-          <TooltipProvider>
-            <Container>{children}</Container>
-          </TooltipProvider>
+          <TooltipProvider>{children}</TooltipProvider>
         </PositionProvider>
       </body>
     </html>

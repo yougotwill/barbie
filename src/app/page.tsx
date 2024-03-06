@@ -1,17 +1,7 @@
+'use client';
 import { MazeGrid } from '@/components/barbie/MazeGrid';
-import { Maze } from '@/types';
-import { cn } from '@/utils';
-import { resolveMaze } from '../scripts/resolveMaze';
+import { mazes } from '../../public/assets/mazes';
 
-export default async function Home() {
-  return (
-    <div
-      className={cn(
-        'mx-auto flex h-screen w-full flex-col items-center justify-center  bg-pink-400',
-        'overflow-hidden',
-      )}
-    >
-      <MazeGrid />
-    </div>
-  );
+export default function Home() {
+  return <MazeGrid maze={mazes[2]} />;
 }

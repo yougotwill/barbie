@@ -10,6 +10,9 @@ module.exports = {
     fontFamily: {
       sans: ['Raleway', 'Helvetica', 'Arial', 'sans-serif'],
     },
+    fontSize: {
+      xxs: '0.3rem',
+    },
     extend: {
       colors: {
         border: 'hsl(var(--border))',

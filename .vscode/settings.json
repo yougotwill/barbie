@@ -1,7 +1,7 @@
 {
   // #region For laptop screen
-  // "window.zoomLevel": -1,
-  // "editor.fontSize": 16,
+  "window.zoomLevel": -1,
+  "editor.fontSize": 16,
   // #endregion
   "commentAnchors.workspace.excludeFiles": "**/{node_modules,.git,.idea,target,.next,out,build,bin,obj,vendor,coverage",
   "files.exclude": {},

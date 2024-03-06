@@ -23,7 +23,7 @@ export default function Container(props: Props) {
     <section className={cn('w-full')}>
       <div
         id={id}
-        className={cn('mx-auto my-0 w-full', classes)}
+        className={cn('mx-auto my-0 w-full overflow-hidden', classes)}
         style={
           !fullWidth
             ? {

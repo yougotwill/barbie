@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { Container } from '@/components/ui';
 import { cn } from '@/utils';
 import { TooltipProvider } from '@/components/ui/Tooltip';
+import { PositionProvider } from '@/contexts/positions';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,9 +19,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           'container mx-auto bg-zinc-800 text-primary-foreground antialiased',
         )}
       >
-        <TooltipProvider>
-          <Container>{children}</Container>
-        </TooltipProvider>
+        <PositionProvider>
+          <TooltipProvider>
+            <Container>{children}</Container>
+          </TooltipProvider>
+        </PositionProvider>
       </body>
     </html>
   );

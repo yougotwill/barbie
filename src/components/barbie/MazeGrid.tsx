@@ -66,16 +66,27 @@ export function MazeGrid() {
   });
 
   return (
-    <div className={cn('h-100 w-100 mx-auto flex items-center justify-center')}>
-      {myMaze.maze.map((row, x) => {
-        return (
-          <div key={`row-${x}`}>
-            {row.map((cell, y) => {
-              return <Block key={`${x},${y}`} pos={{ x, y }} value={cell} />;
-            })}
-          </div>
-        );
-      })}
+    <div className={cn('flex flex-col items-center justify-center')}>
+      <div
+        className={cn('h-100 w-100 mx-auto flex items-center justify-center')}
+      >
+        {myMaze.maze.map((row, x) => {
+          return (
+            <div key={`row-${x}`}>
+              {row.map((cell, y) => {
+                return <Block key={`${x},${y}`} pos={{ x, y }} value={cell} />;
+              })}
+            </div>
+          );
+        })}
+      </div>
+      <div className={cn('absolute bottom-0 left-0')}>
+        <AudioPlayer
+          showJumpControls={false}
+          showFilledProgress={false}
+          src="./assets/barbie.mp3"
+        />
+      </div>
     </div>
   );
 }

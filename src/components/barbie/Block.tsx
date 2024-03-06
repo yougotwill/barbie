@@ -56,7 +56,7 @@ export default function Block(props: BlockProps) {
   return (
     <div
       className={cn(
-        'text-xxs m-1 flex h-2 w-2 items-center justify-center  p-2',
+        'm-1 flex h-2 w-2 items-center justify-center p-2  text-xxs',
         isPlayer ? 'bg-white' : 'bg-pink-700',
         isStart ? 'bg-pink-500' : 'bg-pink-700',
         isEnd ? 'bg-pink-500' : 'bg-pink-700',
